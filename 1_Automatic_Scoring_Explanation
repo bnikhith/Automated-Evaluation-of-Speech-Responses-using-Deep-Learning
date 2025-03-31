@@ -1,0 +1,85 @@
+The code you provided is for an essay scoring system. Here's a breakdown of the code and the libraries used:
+
+Import Modules and Setup:
+
+%matplotlib inline: This line allows plots to be generated directly within the Jupyter notebook.
+Essential libraries:
+numpy (np): Numerical computing library.
+pandas (pd): Data manipulation and analysis library.
+re: Regular expressions for string pattern matching.
+datetime: For working with dates and times.
+Plotting Libraries:
+
+matplotlib.pyplot (plt): Core library for creating various visualizations.
+matplotlib.cm: Colormaps for visualizations (not used extensively).
+seaborn (sns): Statistical data visualization built on top of Matplotlib.
+plt.rcParams: Configures plot resolution.
+Text Processing Libraries:
+
+spacy: Advanced Natural Language Processing (NLP) library.
+from spacy.lang.en.stop_words import STOP_WORDS: Imports English stop words from spaCy.
+Machine Learning Libraries:
+
+sklearn.metrics: Provides evaluation metrics for machine learning models.
+sklearn.feature_extraction.text: Feature extraction from text data (TF-IDF vectorizer).
+sklearn.linear_model: Linear models for machine learning (LinearSVC, LinearRegression).
+sklearn.svm: Support Vector Machines (LinearSVC).
+sklearn.preprocessing: Data preprocessing techniques (StandardScaler).
+sklearn.pipeline: Creates pipelines for chaining machine learning steps.
+sklearn.model_selection: Tools for splitting data, cross-validation, and grid search.
+sklearn.ensemble: Ensemble methods (RandomForestRegressor).
+sklearn.feature_selection: Feature selection techniques (SelectKBest).
+Kappa Metric Libraries:
+
+skll.metrics: Provides the quadratic weighted kappa metric for evaluating agreement.
+Custom Kappa Function:
+
+mean_quadratic_weighted_kappa: Calculates the mean quadratic weighted kappa, a metric for agreement between human and automatic scores.
+Additional Libraries:
+
+warnings: Suppresses warnings generated during code execution (not used extensively).
+Code Breakdown:
+
+Data Loading and Preprocessing:
+
+Reads a pickled DataFrame named training_set containing essay data.
+Explores the data using descriptive statistics and visualizations.
+Leverages spaCy for text processing: tokenization, lemmatization (converting words to their base form), and named entity recognition.
+Removes stop words and punctuation marks.
+Feature Engineering:
+
+Calculates various features from the processed essays, including:
+Document similarity compared to reference essays for each topic.
+Essay length related features (word count, token count, unique token count, etc.).
+Number of stop words removed, sentences, named entities, punctuation marks, etc.
+Parts-of-speech (noun, verb, adjective, etc.) counts.
+Saves the feature-enriched DataFrame to a pickle file.
+Feature Selection:
+
+Selects the top k features using chi-square or F-value based on regression analysis.
+Model Evaluation:
+
+Defines several machine learning models for essay scoring:
+LinearSVC (Support Vector Machine classifier).
+Linear Regression.
+Random Forest Regression.
+ElasticNet (regularized regression).
+Uses GridSearchCV to find the best hyperparameters for ElasticNet for each topic.
+Evaluates each model using the quadratic weighted kappa metric, which considers agreement beyond chance between human and predicted scores.
+Analyzes the impact of feature selection (top k features) on the final model performance.
+Feature Importance:
+
+Trains a Random Forest model to identify the most important features for essay scoring.
+Visualizes feature importance using a bar chart.
+Combining Features:
+
+Combines the top k features with TF-IDF (Term Frequency-Inverse Document Frequency) features extracted from the essays.
+TF-IDF emphasizes words that are important within a document but rare across the corpus.
+Model Evaluation with TF-IDF:
+
+Evaluates the ElasticNet model with GridSearchCV using the combined feature set (top k features + TF-IDF).
+Reports the weighted kappa score across all topics.
+Correlation Analysis (Optional):
+
+Creates a heatmap to visualize the correlation between different features.
+This code demonstrates a comprehensive approach to essay scoring using NLP techniques, feature engineering, machine learning model selection, and evaluation using the kappa metric. It explores
